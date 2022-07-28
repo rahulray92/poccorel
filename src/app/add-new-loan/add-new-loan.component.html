@@ -1,0 +1,99 @@
+<div style="height: 35px;
+display: flex;
+background-color: #6633991f;">
+<div class="split left">
+    <div id="mySidenavleftmenuinnerinner" class="sidenav ">
+        
+        <a [routerLink]="['/profile']">Profile</a>
+        <a [routerLink]="['/loan']" [ngClass]="{'active_class': currentRoute === '/loan'}">Loan</a>
+        <a [routerLink]="['/addnewloan']" [ngClass]="{'active_class': currentRoute === '/addnewloan'}">Add New Loan</a>
+        
+      </div>
+  </div>
+  
+  <div class="split right">
+    <div class="centered">
+        
+        <div style="width: 39%;
+        min-width: 38%;
+        margin: 0rem 0rem 0rem 21rem;">
+<mat-toolbar>
+    <span>Add Loan</span>
+  </mat-toolbar>
+  <mat-card class="my-card">
+     <mat-card-content>
+        <form class="my-form" [formGroup]="addLoanForm" (ngSubmit)="onSubmit()">
+           <mat-form-field class="full-width" style="margin-right: 5rem;
+           display: inline;">
+              <mat-label>First Name</mat-label>
+              <input  matInput type="text"  placeholder="fname" name="fname" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }">
+              <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                <div *ngIf="f.fname.errors.required">First name is required</div>
+            </div>
+           </mat-form-field>
+           <mat-form-field class="full-width" style="margin-right: 5rem;
+           display: inline;">
+              <mat-label>Last Name</mat-label>
+              <input  matInput type="text"  placeholder="lname" name="lname" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+              <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                <div *ngIf="f.lname.errors.required">Last name is required</div>
+            </div>
+           </mat-form-field>
+           <mat-form-field class="full-width"style="margin-right: 5rem;
+           display: inline;">
+              <mat-label>Loan Number</mat-label>
+              <input readonly  matInput  placeholder="LoanNumber" name="loannumber" type="text" formControlName="loannumber" class="form-control" >
+             
+            </mat-form-field>
+            <mat-form-field class="full-width" style="margin-right: 5rem;
+            display: inline;">
+               <mat-label>Property Address</mat-label>
+               <input  matInput type="text"  placeholder="padress" name="padress" formControlName="padress" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.padress.errors }">
+               <div *ngIf="submitted && f.padress.errors" class="invalid-feedback">
+                 <div *ngIf="f.padress.errors.required">Property Address is required</div>
+             </div>
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-raised-button  color="primary">Save</button>
+             </mat-card-actions>
+        </form>
+     </mat-card-content>
+     <app-alert></app-alert>
+  </mat-card>
+ </div>
+    </div>
+    <!-- <div *ngIf="searchDetails" >
+        <h2>Customer Loan Details</h2>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Loan No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Status</th>
+            <th>Assign </th>
+            <th>Created Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of loanData">
+            <td>{{item.loanno}}</td>
+            <td>{{item.fname}}</td>
+            <td>{{item.lname}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.AssignTo}}</td>
+            <td>{{item.createddate}}</td>
+        </tr>
+        
+        <tbody>
+    </table>
+</div>
+       
+    </div> -->
+   <!-- <span style="color: red;
+   margin: 3rem;
+" *ngIf="message">{{message}}</span> -->
+  
+
+</div>

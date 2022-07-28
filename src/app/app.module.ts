@@ -21,6 +21,10 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } 
        from '@angular/platform-browser/animations';
 import { AlertComponent } from './alert/alert.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { LoanComponent } from './loan/loan.component';
+import { FilternlPipe } from './filternl.pipe';
+import { AddNewLoanComponent } from './add-new-loan/add-new-loan.component';
 
 
 
@@ -29,7 +33,11 @@ import { AlertComponent } from './alert/alert.component';
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    AlertComponent
+    AlertComponent,
+    PagenotfoundComponent,
+    LoanComponent,
+    FilternlPipe,
+    AddNewLoanComponent
   ],
   imports: [
     BrowserModule,

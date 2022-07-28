@@ -8,10 +8,19 @@
     padding-top: 20px;
   }
   
+  #mySidenavleftmenuinnerinner {
+    height: 100%;
+    width: 100%;
+    background-color: #E7E9EB;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-left: 7px;
+}
   /* Control the left side */
   .left {
     left: 7px;
-    background-color: #673ab7e8;;
+    background-color: #E7E9EB;;;
   }
   
   /* Control the right side */
@@ -34,16 +43,15 @@
   }
   
   .sidenav a {
-    padding: 8px 8px 8px 32px;
+    font-family: "Segoe UI",Arial,sans-serif;
     text-decoration: none;
-    font-size: 25px;
-    color: #f1f1f1;
     display: block;
-    transition: 0.3s;
+    padding: 2px 1px 1px 16px;
   }
   
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: #000000;
+    background-color: #cccccc;
   }
   
   .sidenav .closebtn {
@@ -58,3 +66,6 @@
     .sidenav {padding-top: 10px;}
     .sidenav a {font-size: 18px;}
   }
+  .active_class{
+    background-color: white;
+}

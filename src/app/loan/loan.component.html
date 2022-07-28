@@ -1,0 +1,92 @@
+<div style="height: 35px;
+display: flex;
+background-color: #6633991f;">
+<div class="split left">
+    <div id="mySidenavleftmenuinnerinner" class="sidenav ">
+        
+        <a [routerLink]="['/profile']">Profile</a>
+        <a [routerLink]="['/loan']" [ngClass]="{'active_class': currentRoute === '/loan'}">Loan</a>
+        <a [routerLink]="['/addnewloan']">Add New Loan</a>
+        
+      </div>
+  </div>
+  
+  <div class="split right">
+    <div class="centered">
+        
+        <form class="example-form" style="margin-left: 3rem;">
+        <mat-form-field class="example-full-width">
+        <span matPrefix> </span>
+        <input type="tel" matInput placeholder="Search loan account" name= "search" [(ngModel)]= "search" (keydown.enter)="searchloan()" (keyup)="onChange($event)">
+        <button matSuffix mat-button (click)="searchloan()"><mat-icon >search</mat-icon></button>
+        </mat-form-field>
+        <br/>
+        <div *ngFor="let item of loanData | filternl:{ fname: search,lname: search, loanno: search }:false">
+            <div *ngIf="searchDetails" >
+                <h2>Customer Loan Details</h2>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Loan No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Status</th>
+                    <th>Assign </th>
+                    <th>Created Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{item.loanno}}</td>
+                    <td>{{item.fname}}</td>
+                    <td>{{item.lname}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.AssignTo}}</td>
+                    <td>{{item.createddate}}</td>
+                </tr>
+                
+                <tbody>
+            </table>
+        </div>
+               
+            </div>
+        </div>
+        
+        </form>
+    </div>
+    <!-- <div *ngIf="searchDetails" >
+        <h2>Customer Loan Details</h2>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Loan No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Status</th>
+            <th>Assign </th>
+            <th>Created Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of loanData">
+            <td>{{item.loanno}}</td>
+            <td>{{item.fname}}</td>
+            <td>{{item.lname}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.AssignTo}}</td>
+            <td>{{item.createddate}}</td>
+        </tr>
+        
+        <tbody>
+    </table>
+</div>
+       
+    </div> -->
+   <span style="color: red;
+   margin: 3rem;
+" *ngIf="message">{{message}}</span>
+  
+
+</div>

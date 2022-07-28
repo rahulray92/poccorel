@@ -16,7 +16,8 @@ import { User } from '../models/user';
        
 //         localStorage.setItem("users", JSON.stringify(JSONDatas));
 //  let users = JSON.parse(localStorage.getItem('users') || '');
-let users = [{ id: 0, firstName: 'Jason', lastName: 'Watmore', username: 'test', password: 'test' }];
+let users = [{ id: 0, firstName: 'Jason', lastName: 'Watmore', username: 'test', password: 'test',role:'normal' },
+{ id: 1, firstName: 'Rahul', lastName: 'Ray', username: 'Rahul', password: '1234',role:'Admin' }];
 localStorage.setItem("users", JSON.stringify(users));
 @Injectable()
 export class FakeBackendData implements HttpInterceptor {
