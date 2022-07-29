@@ -6,7 +6,7 @@ background-color: #6633991f;">
         
         <a [routerLink]="['/profile']" [ngClass]="{'active_class': currentRoute === '/'}">Profile</a>
         <a [routerLink]="['/loan']">Loan</a>
-        <a [routerLink]="['/addnewloan']">Add New Loan</a>
+        <a [routerLink]="['/addnewloan']" *ngIf="isAccessRole">Add New Loan</a>
         
       </div>
   </div>

@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     search:string='';
     isprofile:boolean=false;
     htmlTrustUrl:SafeUrl;currentRoute: string;
+    isAccessRole:boolean=false;
     constructor(
         private authenticationService: AuthenticationService,
         private userService: UserService,
@@ -29,6 +30,8 @@ export class DashboardComponent implements OnInit {
         this.currentRoute=router.url;
         this.currentUser = this.authenticationService.currentUserValue;
         this.htmlTrustUrl=this.sanitizer.bypassSecurityTrustResourceUrl("#");
+        if(this.currentUser!=undefined &&this.currentUser.role=='admin')
+        this.isAccessRole=true;
     }
 
     ngOnInit() {

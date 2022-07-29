@@ -26,7 +26,7 @@ import { LoanComponent } from './loan/loan.component';
 import { FilternlPipe } from './filternl.pipe';
 import { AddNewLoanComponent } from './add-new-loan/add-new-loan.component';
 
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,10 @@ import { AddNewLoanComponent } from './add-new-loan/add-new-loan.component';
         HttpClientModule,
         FormsModule,
         MaterialModule,
-        BrowserAnimationsModule 
+        BrowserAnimationsModule ,
+        ToastrModule.forRoot({timeOut: 10000,
+          positionClass: 'toast-top-right',
+          preventDuplicates: true}), // ToastrModule added
   
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },fakeBackendProvider],

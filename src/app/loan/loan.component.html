@@ -6,7 +6,7 @@ background-color: #6633991f;">
         
         <a [routerLink]="['/profile']">Profile</a>
         <a [routerLink]="['/loan']" [ngClass]="{'active_class': currentRoute === '/loan'}">Loan</a>
-        <a [routerLink]="['/addnewloan']">Add New Loan</a>
+        <a [routerLink]="['/addnewloan']" *ngIf="isAccessRole">Add New Loan</a>
         
       </div>
   </div>
@@ -32,8 +32,12 @@ background-color: #6633991f;">
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Status</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Type</th>
+                    <th>Term (in month)</th>
                     <th>Assign </th>
                     <th>Created Date</th>
+                    <th *ngIf="isAccessRole">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,8 +46,12 @@ background-color: #6633991f;">
                     <td>{{item.fname}}</td>
                     <td>{{item.lname}}</td>
                     <td>{{item.status}}</td>
+                    <td>{{item.lamount}}</td>
+                    <td>{{item.ltype}}</td>
+                    <td>{{item.lterm}}</td>
                     <td>{{item.AssignTo}}</td>
                     <td>{{item.createddate}}</td>
+                    <td *ngIf="isAccessRole"> <span class="material-icons green-color" style="cursor: pointer;" (click)="edit(item.loanno)">edit </span></td>
                 </tr>
                 
                 <tbody>
@@ -55,35 +63,63 @@ background-color: #6633991f;">
         
         </form>
     </div>
-    <!-- <div *ngIf="searchDetails" >
-        <h2>Customer Loan Details</h2>
-<div class="table-wrapper">
-    <table class="fl-table">
-        <thead>
-        <tr>
-            <th>Loan No</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Status</th>
-            <th>Assign </th>
-            <th>Created Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of loanData">
-            <td>{{item.loanno}}</td>
-            <td>{{item.fname}}</td>
-            <td>{{item.lname}}</td>
-            <td>{{item.status}}</td>
-            <td>{{item.AssignTo}}</td>
-            <td>{{item.createddate}}</td>
-        </tr>
-        
-        <tbody>
-    </table>
-</div>
-       
-    </div> -->
+    <!-- Modal -->
+    
+    
+    <div id="popup1" *ngIf="isPopup" class="overlay" style="visibility: visible;
+    opacity: 1;">
+        <div class="popup">
+            <h2 style="background-color: #e3e3e9;height: 45px;">Edit Loan Details</h2>
+            <button class="close"  (click)="close()">&times;</button>
+            
+            <div class="content">
+                <mat-card class="my-card">
+                    <mat-card-content>
+                       <form class="my-form" [formGroup]="editLoanForm" (ngSubmit)="onUpdate()">
+                         
+                          
+                          
+                           <mat-form-field class="full-width" style="margin-right: 5rem;
+                           display: inline;">
+                              <mat-label>Laon Amount</mat-label>
+                              <input  matInput type="text"  placeholder="loan amount" name="lamount" formControlName="lamount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lamount.errors }">
+                              <div *ngIf="submitted && f.lamount.errors" class="invalid-feedback">
+                                <div *ngIf="f.lamount.errors.required">Amount is required</div>
+                            </div>
+                           </mat-form-field>
+                           <mat-form-field appearance="fill"  class="full-width" style="margin-right: 5rem;
+                           display: inline;">
+                               <mat-label>Loan Type</mat-label>
+                               <select matNativeControl required name="ltype" formControlName="ltype" class="form-control" >
+                                   <option label="--select option --"></option>
+                                 <option value="homeloan">Home Loan</option>
+                                 <option value="personalLoan">Personal Loan</option>
+                                 <option value="lacp">Loan against Commercial Property</option>
+                                 <option value="LPL">Land purchase Loan</option>
+                               </select>
+                             </mat-form-field>
+                             <mat-form-field appearance="fill"  class="full-width" style="margin-right: 5rem;
+                           display: inline;">
+                               <mat-label>Loan Term</mat-label>
+                               <select matNativeControl required name="lterm" formControlName="lterm" class="form-control" >
+                                   <option label="--select  --"></option>
+                                 <option value="24">24 Month</option>
+                                 <option value="60">60 Month</option>
+                                 <option value="120">120 Month</option>
+                                 <option value="180">180 Month</option>
+                               </select>
+                             </mat-form-field>
+                             
+                           <mat-card-actions>
+                               <button mat-raised-button  color="primary">Save</button>
+                            </mat-card-actions>
+                       </form>
+                    </mat-card-content>
+                    
+                 </mat-card>
+            </div>
+        </div>
+    </div>
    <span style="color: red;
    margin: 3rem;
 " *ngIf="message">{{message}}</span>
