@@ -1,7 +1,7 @@
 <div style="height: 35px;
 display: flex;
 background-color: #6633991f;">
-<div class="split left">
+<!-- <div class="split left">
     <div id="mySidenavleftmenuinnerinner" class="sidenav ">
         
         <a [routerLink]="['/profile']">Profile</a>
@@ -9,7 +9,7 @@ background-color: #6633991f;">
         <a [routerLink]="['/addnewloan']" *ngIf="isAccessRole">Add New Loan</a>
         
       </div>
-  </div>
+  </div> -->
   
   <div class="split right">
     <div class="centered">
@@ -22,7 +22,7 @@ background-color: #6633991f;">
         </mat-form-field>
         <br/>
         <div *ngFor="let item of loanData | filternl:{ fname: search,lname: search, loanno: search }:false">
-            <div *ngIf="searchDetails" >
+            <div *ngIf="searchDetails &&!isAccessRole" >
                 <h2>Customer Loan Details</h2>
         <div class="table-wrapper">
             <table class="fl-table">
@@ -59,7 +59,47 @@ background-color: #6633991f;">
         </div>
                
             </div>
+           
         </div>
+        
+            
+            <div *ngIf="isAccessRole" >
+                <h2>Customer Loan Details</h2>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Loan No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Status</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Type</th>
+                    <th>Term (in month)</th>
+                    <th>Assign </th>
+                    <th>Created Date</th>
+                    <th *ngIf="isAccessRole">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of loanData | filternl:{ fname: search,lname: search, loanno: search }:false">
+                    <td>{{item.loanno}}</td>
+                    <td>{{item.fname}}</td>
+                    <td>{{item.lname}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.lamount}}</td>
+                    <td>{{item.ltype}}</td>
+                    <td>{{item.lterm}}</td>
+                    <td>{{item.AssignTo}}</td>
+                    <td>{{item.createddate}}</td>
+                    <td *ngIf="isAccessRole"> <span class="material-icons green-color" style="cursor: pointer;" (click)="edit(item.loanno)">edit </span></td>
+                </tr>
+                
+                <tbody>
+            </table>
+        </div>
+               
+            </div>
         
         </form>
     </div>

@@ -9,12 +9,16 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'loan', component: LoanComponent },
-    { path: 'addnewloan', component: AddNewLoanComponent },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard],children:[
+    { path: 'loansearch', component: LoanComponent},
+      { path: 'addnewloan', component: AddNewLoanComponent}
     
-    // { path: '',   redirectTo: '/loan', pathMatch: 'full' },
+  ] },
+    { path: 'login', component: LoginComponent },
+    
+    // { path: 'addnewloan', component: AddNewLoanComponent },
+    
+    { path: '',   redirectTo: 'PagenotfoundComponent', pathMatch: 'full' },
     { path: '**', component: PagenotfoundComponent }
     // otherwise redirect to home
     //{ path: '**', redirectTo: '' }

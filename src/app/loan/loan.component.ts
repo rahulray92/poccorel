@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router ,NavigationEnd} from '@angular/router';
+import { Router ,NavigationEnd, ActivatedRoute, Params} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {  Subscription } from 'rxjs';
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -10,7 +11,7 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: './loan.component.html',
   styleUrls: ['./loan.component.css']
 })
-export class LoanComponent implements OnInit {
+export class LoanComponent implements OnInit,OnDestroy {
 
   // loanData=[{ id: 1, fname: 'Mohit Pal',lname: 'sharm',  loanno:"112333",status:"Pending",AssignTo:"processer",createddate:"20-07-2022"  },
   // { id: 2, fname: 'Vinay ',lname: 'sharma',  loanno:"112334",status:"Pending",AssignTo:"processer",createddate:"20-07-2022" },
@@ -21,7 +22,9 @@ export class LoanComponent implements OnInit {
   loanData;
   isPopup:boolean=false;editLoanForm:FormGroup;submitted = false;loanList:Array<any>=[];
   message:string='';currentRoute: string;currentUser: User;   isAccessRole:boolean=false;
-  constructor(private router: Router,
+  paramSubscription:Subscription;
+
+  constructor(private router: Router,private route:ActivatedRoute,
     private authenticationService: AuthenticationService,private formBuilder: FormBuilder,private toastr: ToastrService) {
     console.log(router.url);
     this.currentRoute=router.url;
@@ -32,6 +35,10 @@ export class LoanComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+   this.paramSubscription= this.route.params.subscribe((params:Params)=>{
+      console.log(params);
+    })
     this.loanData = JSON.parse(localStorage.getItem('loanList') || '');
   }
   // convenience getter for easy access to form fields
@@ -53,7 +60,12 @@ export class LoanComponent implements OnInit {
     }
     else{
       if(this.searchDetails==undefined)
- this.message="Records not found"
+      {
+        if(event.key=='Backspace')
+        
+        this.message="Records not found";
+      }
+ 
     }
     console.log(event);
     console.log(event.target );
@@ -107,6 +119,9 @@ data.splice(index, 1);
   }
   close(){
     this.isPopup=false;
+  }
+  ngOnDestroy(): void {
+    this.paramSubscription.unsubscribe();
   }
   
 }

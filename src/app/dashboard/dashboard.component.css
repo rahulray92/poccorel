@@ -43,15 +43,29 @@
   }
   
   .sidenav a {
-    font-family: "Segoe UI",Arial,sans-serif;
+    /* font-family: "Segoe UI",Arial,sans-serif;
     text-decoration: none;
     display: block;
-    padding: 2px 1px 1px 16px;
+    padding: 2px 1px 1px 16px; */
+    background-color: #b8bdb766;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 6px 18px 9px;
+    color: #020101;;
+    border-radius: 99em;
+    text-decoration: none;
+    width: 11.5%;
+    max-width: 11.5%;
+    margin-top: 5px;
+    display: block;
+    text-align: center;
   }
   
   .sidenav a:hover {
     color: #000000;
-    background-color: #cccccc;
+    background-color: #af989852 !important;
   }
   
   .sidenav .closebtn {
@@ -64,8 +78,8 @@
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 10px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav a {font-size: 14px;}
   }
   .active_class{
-    background-color: white;
+    background-color: white !important;
 }

@@ -3,19 +3,21 @@ display: flex;
 background-color: #6633991f;">
 <div class="split left">
     <div id="mySidenavleftmenuinnerinner" class="sidenav ">
+      <!-- [ngClass]="{'active_class': currentRoute === '/'}" *ngIf="isAccessRole" -->
+        <a [routerLink]="['/profile']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active_class" >Profile</a>
+        <a [routerLink]="['/loansearch']" routerLinkActive="active_class">Loan</a>
         
-        <a [routerLink]="['/profile']" [ngClass]="{'active_class': currentRoute === '/'}">Profile</a>
-        <a [routerLink]="['/loan']">Loan</a>
-        <a [routerLink]="['/addnewloan']" *ngIf="isAccessRole">Add New Loan</a>
+        <a [routerLink]="['/addnewloan']" *ngIf="this.isAccessRole"  routerLinkActive="active_class">Add New Loan</a>
         
       </div>
   </div>
   
   <div class="split right">
-    <div class="centered">
+    <!-- <div class="centered">
         
         <h2 style="margin-left: 4rem;">welcome</h2>
-    </div>
+    </div> -->
+    <router-outlet></router-outlet>
   </div>
   
 
