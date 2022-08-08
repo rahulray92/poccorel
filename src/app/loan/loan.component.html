@@ -63,7 +63,7 @@ background-color: #6633991f;">
         </div>
         
             
-            <div *ngIf="isAccessRole" >
+            <div *ngIf="isAccessRole && loanData?.length>0" >
                 <h2>Customer Loan Details</h2>
         <div class="table-wrapper">
             <table class="fl-table">

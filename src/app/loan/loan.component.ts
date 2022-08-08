@@ -39,8 +39,12 @@ export class LoanComponent implements OnInit,OnDestroy {
    this.paramSubscription= this.route.params.subscribe((params:Params)=>{
       console.log(params);
     })
-    this.loanData = JSON.parse(localStorage.getItem('loanList') || '');
+    this.loanData = sessionStorage.getItem('loanList')==null?null:JSON.parse(sessionStorage.getItem('loanList') || '');
+  
+    if(this.loanData==null)
+    this.message="There are no any record exists."
   }
+
   // convenience getter for easy access to form fields
   get f() { return this.editLoanForm.controls; }
 
@@ -49,7 +53,7 @@ export class LoanComponent implements OnInit,OnDestroy {
     this.message='';
     //this.searchDetails=this.loanData.find(x=>x.loanId==this.search);
  if(this.searchDetails==undefined)
- this.message="Records not found"
+ this.message="Records not found";
   }
   onChange(event){
     this.message='';
@@ -100,7 +104,7 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 let datetoday = mm + '/' + dd + '/' + yyyy;
-let data:Array<any> = JSON.parse(localStorage.getItem("loanList")||'')
+let data:Array<any> = sessionStorage.getItem("loanList")==null?null:JSON.parse(sessionStorage.getItem("loanList")||'')
 
 let NewData = []
 let index=data.findIndex(x=>x.loanno==this.f.loannumber.value);
@@ -110,7 +114,7 @@ data.splice(index, 1);
     'lname':this.f.lname.value,'loanno':this.f.loannumber.value,'paddress':this.f.padress.value,'AssignTo':'','createddate':datetoday,'lamount':this.f.lamount.value}
     //this.loanList.push(obj);
     data.push(obj);
-    localStorage.setItem("loanList", JSON.stringify(data));
+    sessionStorage.setItem("loanList", JSON.stringify(data));
     this.submitted = true;
     this.isPopup=false;
     this.toastr.success('Updated succesfully!');

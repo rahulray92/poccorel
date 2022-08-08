@@ -18,7 +18,7 @@ import { User } from '../models/user';
 //  let users = JSON.parse(localStorage.getItem('users') || '');
 let users = [{ id: 0, firstName: 'Jason', lastName: 'Watmore', username: 'test', password: 'test',role:'normal' },
 { id: 1, firstName: 'Rahul', lastName: 'Ray', username: 'Rahul', password: '1234',role:'admin' }];
-localStorage.setItem("users", JSON.stringify(users));
+sessionStorage.setItem("users", JSON.stringify(users));
 @Injectable()
 export class FakeBackendData implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

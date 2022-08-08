@@ -68,15 +68,17 @@ let datetoday = mm + '/' + dd + '/' + yyyy;
     let obj=  {'status': 'Inprogress','fname':this.f.fname.value,'ltype':this.f.ltype.value,'lterm':this.f.lterm.value,'sex':this.f.sex.value,
     'lname':this.f.lname.value,'loanno':this.f.loannumber.value,'paddress':this.f.padress.value,'AssignTo':'','createddate':datetoday,'lamount':this.f.lamount.value}
     //this.loanList.push();
-    dataList=JSON.parse(localStorage.getItem("loanList")||'');
+    dataList=sessionStorage.getItem("loanList")==null?null:JSON.parse(sessionStorage.getItem("loanList")||'');
     if(dataList!=null)
     {
       this.loanList=dataList;
       this.loanList.push(obj);
     
     }
+    if(dataList==null)
+    this.loanList.push(obj);
 
-    localStorage.setItem("loanList", JSON.stringify(this.loanList));
+    sessionStorage.setItem("loanList", JSON.stringify(this.loanList));
     this.toastr.success('Loan data save succesfully!');
    // this.authenticationService.login(this.f.username.value, this.f.password.value) 
    this.resetForm();
